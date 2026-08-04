@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/shadcn-ui/ui",
+  "issue": "https://github.com/shadcn-ui/ui/issues/10543",
+  "number": 10543,
+  "title": "[bug]: Select popup horizontally misaligned across most base styles",
+  "state": "open",
+  "label": "bug",
+  "verified_at": "2026-07-15T08:00:00Z",
+  "verification": "Public unauthenticated GitHub API",
+  "open_competing_prs_matching_issue_number": 0,
+  "base_commit": "bc0705384b51252af26dcc65425b216bf5eb063c",
+  "target_commit": "50fd7bf22fcce9c9843a8f940d7a59f3d7b36732"
+}

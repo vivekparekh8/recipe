@@ -1,0 +1,25 @@
+Issue verification
+------------------
+URL: https://github.com/mui/material-ui/issues/41067
+State: open
+Labels: type: bug; scope: speed dial; ready to take
+Active competing PR: none found
+Base: 307ccfd4fac5a9d1c8a98e470ff3e23b6b403c4d
+
+Command:
+node repro-material-ui-41067.mjs
+
+Output (exit 1):
+Issue #41067 reproduced:
+- SpeedDial does not preserve left placement vertically and use bottom horizontally.
+- SpeedDialAction has no static-tooltip positioning variant for top.
+- SpeedDialAction has no static-tooltip positioning variant for bottom.
+
+Baseline command:
+pnpm test:node SpeedDial --run
+
+Baseline output (exit 0):
+Test Files  3 passed (3)
+Tests       110 passed | 20 skipped (130)
+
+Interpretation: existing tests encoded the old horizontal `top` default but did not verify that persistent top/bottom labels had positioning styles.

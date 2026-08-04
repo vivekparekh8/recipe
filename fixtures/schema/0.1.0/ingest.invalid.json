@@ -1,0 +1,10 @@
+[
+  {
+    "kind": "tool",
+    "summary": "Missing the required tool name"
+  },
+  {
+    "kind": "future-record",
+    "payload": true
+  }
+]

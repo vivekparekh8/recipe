@@ -1,0 +1,43 @@
+Recipe e3c22a53-36a6-4ba4-b7ae-c9eb3f26a569
+  bundle: <DEMO_WORKSPACE>/.git/recipes/50fd7bf22fcce9c9843a8f940d7a59f3d7b36732.json.zst
+  source: codex
+  base:   bc0705384b51252af26dcc65425b216bf5eb063c
+  target: 50fd7bf22fcce9c9843a8f940d7a59f3d7b36732
+  status: pure_ai
+  prompts: 1
+  events:  4
+  checkpoints: 1
+  human edits: 0
+  files:   apps/v4/public/r/styles/base-luma/select.json, apps/v4/public/r/styles/base-lyra/select.json, apps/v4/public/r/styles/base-maia/select.json, apps/v4/public/r/styles/base-mira/select.json, apps/v4/public/r/styles/base-nova/select.json, apps/v4/public/r/styles/base-rhea/select.json, apps/v4/public/r/styles/base-sera/select.json, apps/v4/public/r/styles/base-vega/select.json, apps/v4/registry/bases/base/ui/select.tsx, apps/v4/registry/select.test.ts, apps/v4/styles/base-luma/ui/select.tsx, apps/v4/styles/base-lyra/ui/select.tsx, apps/v4/styles/base-maia/ui/select.tsx, apps/v4/styles/base-mira/ui/select.tsx, apps/v4/styles/base-nova/ui-rtl/select.tsx, apps/v4/styles/base-nova/ui/select.tsx, apps/v4/styles/base-rhea/ui/select.tsx, apps/v4/styles/base-sera/ui/select.tsx, apps/v4/styles/base-vega/ui/select.tsx
+  attached: yes
+  redactions: 0
+  secret findings: 0
+
+Timeline:
+  1. shell_command (evt_3a0b4d39-5e4c-4bc3-9802-6e30419819e3) :: Run codex
+     prompt: Fix shadcn-ui/ui issue #10543 (https://github.com/shadcn-ui/ui/issues/10543): Base UI Select popups are horizontally misaligned with their triggers, particularly Base Luma, because alignItemWithTrigger aligns selected-item text while the popup width remains exactly var(--anchor-width), so horizontal item inset leaves the popup edge short. Work only in this repository. Read CONTRIBUTING.md and apps/v4/registry/README.md first. Do not commit, push, comment, or open a pull request; Recipe will create the final commit. Keep the change narrowly scoped and preserve generated-file conventions. Investigate the Base UI Select positioning and style padding rather than blindly applying the issue comment. Implement the smallest robust fix in the authored Base Select registry source, ensure every generated Base style remains consistent through the registry build, and do not modify Radix styles or lockfiles. Add a focused regression check where practical that demonstrates popup sizing compensates for item-alignment inset while preserving the alignItemWithTrigger=false behavior. Run the smallest authoritative check first, then the relevant targeted registry build, typecheck, lint, and formatting checks available for the touched scope. Review the final diff and leave the worktree with only the focused source/test/generated changes required by the fix. In your final response, summarize the root cause, changed files, and exact commands/results. Do not create a git commit.
+  2. shell_command (evt_43750f32-eeb2-4c3f-80bd-5ec3ec967ced) :: Run codex
+     prompt: Fix shadcn-ui/ui issue #10543 (https://github.com/shadcn-ui/ui/issues/10543): Base UI Select popups are horizontally misaligned with their triggers, particularly Base Luma, because alignItemWithTrigger aligns selected-item text while the popup width remains exactly var(--anchor-width), so horizontal item inset leaves the popup edge short. Work only in this repository. Read CONTRIBUTING.md and apps/v4/registry/README.md first. Do not commit, push, comment, or open a pull request; Recipe will create the final commit. Keep the change narrowly scoped and preserve generated-file conventions. Investigate the Base UI Select positioning and style padding rather than blindly applying the issue comment. Implement the smallest robust fix in the authored Base Select registry source, ensure every generated Base style remains consistent through the registry build, and do not modify Radix styles or lockfiles. Add a focused regression check where practical that demonstrates popup sizing compensates for item-alignment inset while preserving the alignItemWithTrigger=false behavior. Run the smallest authoritative check first, then the relevant targeted registry build, typecheck, lint, and formatting checks available for the touched scope. Review the final diff and leave the worktree with only the focused source/test/generated changes required by the fix. In your final response, summarize the root cause, changed files, and exact commands/results. Do not create a git commit.
+     files:  apps/v4/public/r/styles/base-luma/select.json, apps/v4/public/r/styles/base-lyra/select.json, apps/v4/public/r/styles/base-maia/select.json, apps/v4/public/r/styles/base-mira/select.json, apps/v4/public/r/styles/base-nova/select.json, apps/v4/public/r/styles/base-rhea/select.json, apps/v4/public/r/styles/base-sera/select.json, apps/v4/public/r/styles/base-vega/select.json, apps/v4/registry/bases/base/ui/select.tsx, apps/v4/registry/select.test.ts, apps/v4/styles/base-luma/ui/select.tsx, apps/v4/styles/base-lyra/ui/select.tsx, apps/v4/styles/base-maia/ui/select.tsx, apps/v4/styles/base-mira/ui/select.tsx, apps/v4/styles/base-nova/ui-rtl/select.tsx, apps/v4/styles/base-nova/ui/select.tsx, apps/v4/styles/base-rhea/ui/select.tsx, apps/v4/styles/base-sera/ui/select.tsx, apps/v4/styles/base-vega/ui/select.tsx
+     checkpoint: file_edit_checkpoint (evt_010d21e0-6067-450d-b63a-44cdf9f371a7) :: Changes from codex [apps/v4/public/r/styles/base-luma/select.json, apps/v4/public/r/styles/base-lyra/select.json, apps/v4/public/r/styles/base-maia/select.json, apps/v4/public/r/styles/base-mira/select.json, apps/v4/public/r/styles/base-nova/select.json, apps/v4/public/r/styles/base-rhea/select.json, apps/v4/public/r/styles/base-sera/select.json, apps/v4/public/r/styles/base-vega/select.json, apps/v4/registry/bases/base/ui/select.tsx, apps/v4/registry/select.test.ts, apps/v4/styles/base-luma/ui/select.tsx, apps/v4/styles/base-lyra/ui/select.tsx, apps/v4/styles/base-maia/ui/select.tsx, apps/v4/styles/base-mira/ui/select.tsx, apps/v4/styles/base-nova/ui-rtl/select.tsx, apps/v4/styles/base-nova/ui/select.tsx, apps/v4/styles/base-rhea/ui/select.tsx, apps/v4/styles/base-sera/ui/select.tsx, apps/v4/styles/base-vega/ui/select.tsx]
+
+Trailers:
+Recipe-Id: e3c22a53-36a6-4ba4-b7ae-c9eb3f26a569
+Recipe-Base: bc0705384b51252af26dcc65425b216bf5eb063c
+Recipe-SHA256: c191f51e0873f9505e5f7aa0e93b90571cb9f6a1c60d0532b3138f79aa73c073
+Recipe-Status: pure_ai
+
+Attachment note (refs/notes/recipe):
+Recipe-Id: e3c22a53-36a6-4ba4-b7ae-c9eb3f26a569
+Recipe-Base: bc0705384b51252af26dcc65425b216bf5eb063c
+Recipe-SHA256: c191f51e0873f9505e5f7aa0e93b90571cb9f6a1c60d0532b3138f79aa73c073
+Recipe-Status: pure_ai
+
+Recipe-Notes-Ref: refs/notes/recipe
+Recipe-Attached-At: 2026-07-15T07:51:46.757Z
+Recipe-Bundle: .git/recipes/50fd7bf22fcce9c9843a8f940d7a59f3d7b36732.json.zst
+Recipe-Summary: .git/recipe-publish/50fd7bf22fcc.recipe.md
+Recipe-Trailers: .git/recipe-publish/50fd7bf22fcc.trailers.txt
+Recipe-Artifact: .git/recipe-publish/50fd7bf22fcc.recipe.json.zst
+Recipe-Comment: .git/recipe-publish/50fd7bf22fcc.recipe-comment.md
+Recipe-Manifest: .git/recipe-publish/50fd7bf22fcc.recipe-publish.json

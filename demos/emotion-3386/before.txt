@@ -1,0 +1,25 @@
+Issue: https://github.com/emotion-js/emotion/issues/3386
+Environment: @babel/core 8.0.1, @emotion/babel-plugin 11.13.5
+
+Reproduction input:
+
+  import { css } from '@emotion/react'
+  function getStyles() {
+    const styles = css({ color: 'hotpink' })
+    return styles
+  }
+
+Command:
+
+  node repro.mjs
+
+Observed before the fix (exit 1):
+
+  TypeError: <fixture>/input.js: path.hoist is not a function
+      at transformCssCallExpression (.../emotion-babel-plugin.cjs.js:1086:10)
+      at cssTransformer (.../emotion-babel-plugin.cjs.js:1159:3)
+      ...
+  code: BABEL_TRANSFORM_ERROR
+
+The reproduction was run in an isolated temporary harness. Local absolute paths
+were removed from this public-safe record.

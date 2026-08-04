@@ -1,0 +1,35 @@
+# Public read-only issue verification
+curl -L --fail --silent --show-error https://api.github.com/repos/mui/material-ui/issues/41067
+curl -L --fail --silent --show-error -H "Accept: application/vnd.github+json" "https://api.github.com/repos/mui/material-ui/issues/41067/timeline?per_page=100"
+
+# Checkout and branch
+git clone --depth 1 https://github.com/mui/material-ui.git "$WORKSPACE"
+git switch -c recipe-demo/41067-speed-dial-tooltip-placement
+
+# Required tool inspection
+node "$RECIPE_SOURCE/src/cli.js" run --help
+codex --help
+codex exec --help
+
+# Setup and baseline
+corepack pnpm install --frozen-lockfile
+pnpm test:node SpeedDial --run
+node repro-material-ui-41067.mjs
+node "$RECIPE_SOURCE/src/cli.js" init
+
+# Captured implementation; prompt text is exactly prompt.md
+PROMPT="$(cat prompt.md)"
+node "$RECIPE_SOURCE/src/cli.js" run --commit --message "fix: correct horizontal SpeedDial tooltip placement" --prompt "$PROMPT" -- codex --ask-for-approval never --sandbox workspace-write exec --ephemeral "$PROMPT"
+
+# Independent checks
+pnpm test:node SpeedDial --run
+./node_modules/.bin/prettier --check packages/mui-material/src/SpeedDial/SpeedDial.js packages/mui-material/src/SpeedDial/SpeedDial.test.js packages/mui-material/src/SpeedDialAction/SpeedDialAction.js packages/mui-material/src/SpeedDialAction/SpeedDialAction.test.js packages/mui-material/src/SpeedDialAction/speedDialActionClasses.ts
+./node_modules/.bin/eslint packages/mui-material/src/SpeedDial/SpeedDial.js packages/mui-material/src/SpeedDial/SpeedDial.test.js packages/mui-material/src/SpeedDialAction/SpeedDialAction.js packages/mui-material/src/SpeedDialAction/SpeedDialAction.test.js packages/mui-material/src/SpeedDialAction/speedDialActionClasses.ts
+./node_modules/.bin/tsc -p packages/mui-material/tsconfig.json --noEmit
+git diff --check HEAD^ HEAD
+
+# Recipe acceptance
+node "$RECIPE_SOURCE/src/cli.js" status
+node "$RECIPE_SOURCE/src/cli.js" inspect HEAD --timeline
+node "$RECIPE_SOURCE/src/cli.js" replay HEAD
+node "$RECIPE_SOURCE/src/cli.js" verify HEAD --replay --json

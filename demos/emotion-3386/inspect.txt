@@ -1,0 +1,43 @@
+Recipe 5dc918c1-335a-4309-a761-520671f99545
+  bundle: <WORKSPACE>/.git/recipes/2a88c454952318b8efd3e8e95e0e8117f30fc0e4.json.zst
+  source: codex
+  base:   b882bcba85132554992e4bd49e94c95939bbf810
+  target: 2a88c454952318b8efd3e8e95e0e8117f30fc0e4
+  status: pure_ai
+  prompts: 2
+  events:  5
+  checkpoints: 1
+  human edits: 0
+  files:   .changeset/tidy-dingos-hoist.md, packages/babel-plugin/__tests__/babel-8-compat.js, packages/babel-plugin/src/core-macro.js
+  attached: yes
+  redactions: 0
+  secret findings: 0
+
+Timeline:
+  1. shell_command (evt_7dba2ae9-1c3a-4770-9e99-6e7a6f748ba5) :: Run codex
+     prompt: Fix https://github.com/emotion-js/emotion/issues/3386 in this checkout. The issue is reproducible with @babel/core 8.0.1 and @emotion/babel-plugin 11.13.5: transforming a function-local static call such as `const styles = css({ color: 'hotpink' })` throws `TypeError: path.hoist is not a function` from transformCssCallExpression because Babel 8 removed NodePath#hoist. Follow CONTRIBUTING.md and repository conventions. Keep the fix narrowly scoped to @emotion/babel-plugin. Use strict TDD: first add a focused regression test that simulates Babel 8's missing `path.hoist` API while proving a function-local static css call remains hoisted safely and output semantics are preserved. Then implement the smallest compatibility fix that works with both Babel 7 and Babel 8 without depending on removed APIs. Prefer Babel-supported scope/path operations and preserve existing static extraction and hoisting behavior. Add a patch changeset for @emotion/babel-plugin with concise consumer-facing wording. Run the smallest authoritative Babel plugin test first, then the complete @emotion/babel-plugin test set and relevant lint for changed files if practical. Do not alter yarn.lock, generated files, snapshots unrelated to the regression, or other packages. Do not weaken tests or suppress errors. Do not commit; Recipe will create the final commit. At the end, report changed files and exact commands/results.
+  2. shell_command (evt_6699c6e7-980d-40bd-ba9f-0b9e31465d70) :: Run codex
+     prompt: Fix https://github.com/emotion-js/emotion/issues/3386 in this checkout. The issue is reproducible with @babel/core 8.0.1 and @emotion/babel-plugin 11.13.5: transforming a function-local static call such as `const styles = css({ color: 'hotpink' })` throws `TypeError: path.hoist is not a function` from transformCssCallExpression because Babel 8 removed NodePath#hoist. Follow CONTRIBUTING.md and repository conventions. Keep the fix narrowly scoped to @emotion/babel-plugin. Use strict TDD: first add a focused regression test that simulates Babel 8's missing `path.hoist` API while proving a function-local static css call remains hoisted safely and output semantics are preserved. Then implement the smallest compatibility fix that works with both Babel 7 and Babel 8 without depending on removed APIs. Prefer Babel-supported scope/path operations and preserve existing static extraction and hoisting behavior. Add a patch changeset for @emotion/babel-plugin with concise consumer-facing wording. Run the smallest authoritative Babel plugin test first, then the complete @emotion/babel-plugin test set and relevant lint for changed files if practical. Do not alter yarn.lock, generated files, snapshots unrelated to the regression, or other packages. Do not weaken tests or suppress errors. Do not commit; Recipe will create the final commit. At the end, report changed files and exact commands/results.
+     files:  .changeset/tidy-dingos-hoist.md, packages/babel-plugin/__tests__/babel-8-compat.js, packages/babel-plugin/src/core-macro.js
+     checkpoint: file_edit_checkpoint (evt_b097c799-f006-439d-bfff-d279dd0ea316) :: Changes from codex [.changeset/tidy-dingos-hoist.md, packages/babel-plugin/__tests__/babel-8-compat.js, packages/babel-plugin/src/core-macro.js]
+
+Trailers:
+Recipe-Id: 5dc918c1-335a-4309-a761-520671f99545
+Recipe-Base: b882bcba85132554992e4bd49e94c95939bbf810
+Recipe-SHA256: 5a290841158ed57e99b2922b7f51d3df4ef452550877c6c15eefe05db51a90be
+Recipe-Status: pure_ai
+
+Attachment note (refs/notes/recipe):
+Recipe-Id: 5dc918c1-335a-4309-a761-520671f99545
+Recipe-Base: b882bcba85132554992e4bd49e94c95939bbf810
+Recipe-SHA256: 5a290841158ed57e99b2922b7f51d3df4ef452550877c6c15eefe05db51a90be
+Recipe-Status: pure_ai
+
+Recipe-Notes-Ref: refs/notes/recipe
+Recipe-Attached-At: 2026-07-15T07:49:18.204Z
+Recipe-Bundle: .git/recipes/2a88c454952318b8efd3e8e95e0e8117f30fc0e4.json.zst
+Recipe-Summary: .git/recipe-publish/2a88c4549523.recipe.md
+Recipe-Trailers: .git/recipe-publish/2a88c4549523.trailers.txt
+Recipe-Artifact: .git/recipe-publish/2a88c4549523.recipe.json.zst
+Recipe-Comment: .git/recipe-publish/2a88c4549523.recipe-comment.md
+Recipe-Manifest: .git/recipe-publish/2a88c4549523.recipe-publish.json

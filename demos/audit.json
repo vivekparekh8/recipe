@@ -1,0 +1,41 @@
+{
+  "auditedAt": "2026-07-21T06:20:42.368Z",
+  "results": [
+    {
+      "name": "emotion-3386",
+      "base": "b882bcba85132554992e4bd49e94c95939bbf810",
+      "target": "2a88c454952318b8efd3e8e95e0e8117f30fc0e4",
+      "branch": "recipe-demo/3386-babel-8-path-hoist",
+      "replay": "exact",
+      "verifyOk": true,
+      "failures": 0,
+      "warnings": 5,
+      "clean": true,
+      "noteSource": "bundle"
+    },
+    {
+      "name": "material-ui-41067",
+      "base": "307ccfd4fac5a9d1c8a98e470ff3e23b6b403c4d",
+      "target": "ae3853d5c903aaf19a7699fcdbe136e9bd838fb2",
+      "branch": "recipe-demo/41067-speed-dial-tooltip-placement",
+      "replay": "exact",
+      "verifyOk": true,
+      "failures": 0,
+      "warnings": 5,
+      "clean": true,
+      "noteSource": "bundle"
+    },
+    {
+      "name": "shadcn-ui-10543",
+      "base": "bc0705384b51252af26dcc65425b216bf5eb063c",
+      "target": "50fd7bf22fcce9c9843a8f940d7a59f3d7b36732",
+      "branch": "recipe-demo/10543-align-base-select-popup",
+      "replay": "exact",
+      "verifyOk": true,
+      "failures": 0,
+      "warnings": 5,
+      "clean": true,
+      "noteSource": "recipe-note.txt"
+    }
+  ]
+}

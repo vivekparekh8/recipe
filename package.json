@@ -1,0 +1,28 @@
+{
+  "name": "recipe",
+  "version": "0.1.0",
+  "description": "Replayable source maps for AI-assisted commits.",
+  "type": "module",
+  "bin": {
+    "recipe": "./src/cli.js"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "recipe": "node ./src/cli.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivekparekh8/recipe.git"
+  },
+  "homepage": "https://github.com/vivekparekh8/recipe#readme",
+  "bugs": {
+    "url": "https://github.com/vivekparekh8/recipe/issues"
+  },
+  "license": "MIT"
+}

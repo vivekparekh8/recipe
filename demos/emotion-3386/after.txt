@@ -1,0 +1,37 @@
+Target commit: 2a88c454952318b8efd3e8e95e0e8117f30fc0e4
+
+Focused regression test:
+  yarn test packages/babel-plugin/__tests__/babel-8-compat.js --runInBand --no-watchman
+  PASS packages/babel-plugin/__tests__/babel-8-compat.js
+  Test Suites: 1 passed, 1 total
+  Tests:       1 passed, 1 total
+
+Complete affected-package suite:
+  yarn test packages/babel-plugin --runInBand --no-watchman
+  Test Suites: 17 passed, 17 total
+  Tests:       217 passed, 217 total
+  Snapshots:   215 passed, 215 total
+
+Changed-file lint:
+  yarn eslint packages/babel-plugin/src/core-macro.js packages/babel-plugin/__tests__/babel-8-compat.js
+  Exit: 0
+
+Patch hygiene:
+  git diff --check HEAD^ HEAD
+  Exit: 0
+
+Independent coordinator rerun:
+  Focused regression test passed 1/1.
+  Worktree remained clean.
+
+Clean-clone demo rehearsal:
+  Restored branch and refs/notes/recipe from demo.git.bundle.
+  Installed the packaged normalized recipe.json.zst into .git/recipes.
+  recipe inspect HEAD --timeline: exit 0, attached yes.
+  recipe replay HEAD: exact, checkpoints 1/1.
+
+Optional build caveat:
+  yarn build @emotion/babel-plugin
+  Could not run because the interrupted monorepo dependency setup did not leave
+  the Preconstruct command available. This was an environment setup limitation,
+  not a failing build result.

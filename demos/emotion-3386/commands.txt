@@ -1,0 +1,33 @@
+# Selection and public read-only verification
+git clone https://github.com/emotion-js/emotion.git <WORKSPACE>
+curl -L --fail --silent --show-error https://api.github.com/repos/emotion-js/emotion/issues/3386
+curl -L --fail --silent --show-error 'https://api.github.com/search/issues?q=repo%3Aemotion-js%2Femotion+is%3Apr+3386'
+git switch -c recipe-demo/3386-babel-8-path-hoist
+
+# Required help and bootstrap checks
+node <RECIPE_SOURCE>/src/cli.js run --help
+codex --help
+codex exec --help
+node <RECIPE_SOURCE>/src/cli.js init
+
+# Initial invocation preserved in the Recipe timeline; Codex rejected the option order and exited 2
+node <RECIPE_SOURCE>/src/cli.js run --commit --message "fix: support Babel 8 static style hoisting" --prompt "<EXACT_PROMPT_FROM_prompt.md>" -- codex exec --sandbox workspace-write --ask-for-approval never --ephemeral --color never "<EXACT_PROMPT_FROM_prompt.md>"
+
+# Corrected invocation resumed the same Recipe session; Recipe created the commit
+node <RECIPE_SOURCE>/src/cli.js run --resume --commit --message "fix: support Babel 8 static style hoisting" --prompt "<EXACT_PROMPT_FROM_prompt.md>" -- codex --ask-for-approval never exec --sandbox workspace-write --ephemeral --color never "<EXACT_PROMPT_FROM_prompt.md>"
+
+# Verification
+yarn test packages/babel-plugin/__tests__/babel-8-compat.js --runInBand --no-watchman
+yarn test packages/babel-plugin --runInBand --no-watchman
+yarn eslint packages/babel-plugin/src/core-macro.js packages/babel-plugin/__tests__/babel-8-compat.js
+git diff --check HEAD^ HEAD
+node <RECIPE_SOURCE>/src/cli.js status
+node <RECIPE_SOURCE>/src/cli.js inspect HEAD --timeline
+node <RECIPE_SOURCE>/src/cli.js replay HEAD
+node <RECIPE_SOURCE>/src/cli.js verify HEAD --replay --json
+
+# Demo artifact generation
+git format-patch -1 --stdout HEAD
+git diff HEAD^ HEAD
+git notes --ref=refs/notes/recipe show HEAD
+git bundle create demo.git.bundle recipe-demo/3386-babel-8-path-hoist refs/notes/recipe

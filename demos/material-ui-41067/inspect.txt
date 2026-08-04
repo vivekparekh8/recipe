@@ -1,0 +1,27 @@
+Command:
+recipe inspect HEAD --timeline
+
+Recipe 81c6f151-9e19-4867-b3a9-55ca5de6f011
+  bundle: <repo>/.git/recipes/ae3853d5c903aaf19a7699fcdbe136e9bd838fb2.json.zst
+  source: codex
+  base:   307ccfd4fac5a9d1c8a98e470ff3e23b6b403c4d
+  target: ae3853d5c903aaf19a7699fcdbe136e9bd838fb2
+  status: pure_ai
+  prompts: 1
+  events:  3
+  checkpoints: 1
+  human edits: 0
+  files:   packages/mui-material/src/SpeedDial/SpeedDial.js, packages/mui-material/src/SpeedDial/SpeedDial.test.js, packages/mui-material/src/SpeedDialAction/SpeedDialAction.js, packages/mui-material/src/SpeedDialAction/SpeedDialAction.test.js, packages/mui-material/src/SpeedDialAction/speedDialActionClasses.ts
+  attached: yes
+  redactions: 0
+  secret findings: 0
+
+Timeline:
+  1. shell_command :: Run codex
+     checkpoint: file_edit_checkpoint :: Changes from codex
+
+Trailers:
+Recipe-Id: 81c6f151-9e19-4867-b3a9-55ca5de6f011
+Recipe-Base: 307ccfd4fac5a9d1c8a98e470ff3e23b6b403c4d
+Recipe-SHA256: 0ecafc8399c4094e9ab33cb9143f624574bde2ad9589ebb6ed8f790eb0fd206d
+Recipe-Status: pure_ai

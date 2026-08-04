@@ -1,0 +1,13 @@
+Recipe-Id: 81c6f151-9e19-4867-b3a9-55ca5de6f011
+Recipe-Base: 307ccfd4fac5a9d1c8a98e470ff3e23b6b403c4d
+Recipe-SHA256: 0ecafc8399c4094e9ab33cb9143f624574bde2ad9589ebb6ed8f790eb0fd206d
+Recipe-Status: pure_ai
+
+Recipe-Notes-Ref: refs/notes/recipe
+Recipe-Attached-At: 2026-07-15T07:31:02.456Z
+Recipe-Bundle: .git/recipes/ae3853d5c903aaf19a7699fcdbe136e9bd838fb2.json.zst
+Recipe-Summary: .git/recipe-publish/ae3853d5c903.recipe.md
+Recipe-Trailers: .git/recipe-publish/ae3853d5c903.trailers.txt
+Recipe-Artifact: .git/recipe-publish/ae3853d5c903.recipe.json.zst
+Recipe-Comment: .git/recipe-publish/ae3853d5c903.recipe-comment.md
+Recipe-Manifest: .git/recipe-publish/ae3853d5c903.recipe-publish.json

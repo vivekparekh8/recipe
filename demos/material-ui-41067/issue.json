@@ -1,0 +1,20 @@
+{
+  "repository": "mui/material-ui",
+  "repository_url": "https://github.com/mui/material-ui",
+  "issue_number": 41067,
+  "issue_url": "https://github.com/mui/material-ui/issues/41067",
+  "title": "[material-ui][SpeedDial] Bug with right/left direction in persistent action tooltips",
+  "state": "open",
+  "verified_at": "2026-07-15T00:00:00-07:00",
+  "verification_source": "GitHub public REST API and public issue timeline",
+  "labels": ["type: bug", "scope: speed dial", "ready to take"],
+  "assignees": [],
+  "active_competing_pull_request": null,
+  "closed_unmerged_attempts": [
+    "https://github.com/mui/material-ui/pull/41414",
+    "https://github.com/mui/material-ui/pull/41878",
+    "https://github.com/mui/material-ui/pull/41997",
+    "https://github.com/mui/material-ui/pull/48377"
+  ],
+  "suitability": "Confirmed bug with deterministic source and unit-test coverage; no active competing PR found."
+}

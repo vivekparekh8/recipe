@@ -1,0 +1,41 @@
+{
+  "sanitized": true,
+  "ok": true,
+  "ref": "HEAD",
+  "bundlePath": "<repo>/.git/recipes/ae3853d5c903aaf19a7699fcdbe136e9bd838fb2.json.zst",
+  "recipeId": "81c6f151-9e19-4867-b3a9-55ca5de6f011",
+  "targetCommit": "ae3853d5c903aaf19a7699fcdbe136e9bd838fb2",
+  "attached": true,
+  "warningCount": 5,
+  "failureCount": 0,
+  "checks": {
+    "bundleSchema": true,
+    "bundleIntegrity": true,
+    "attachmentPresent": true,
+    "attachmentMatches": true,
+    "artifactIntegrity": true,
+    "trailerMatches": true,
+    "replayCheckpoints": true,
+    "replayDiff": "exact",
+    "replayTests": true
+  },
+  "warnings": [
+    "No Recipe-Artifact-Url; local-only demo.",
+    "No Recipe-Release-Tag; no release was published.",
+    "No Recipe-Release-Url; no release was published.",
+    "No Recipe-Summary-Url; local-only demo.",
+    "No Recipe-Manifest-Url; local-only demo."
+  ],
+  "replay": {
+    "status": "exact",
+    "appliedCheckpoints": 1,
+    "totalCheckpoints": 1,
+    "appliedAgentCheckpoints": 1,
+    "totalAgentCheckpoints": 1,
+    "appliedHumanEdits": 0,
+    "totalHumanEdits": 0,
+    "matchedTests": 0,
+    "totalTests": 0,
+    "failedCheckpoint": null
+  }
+}

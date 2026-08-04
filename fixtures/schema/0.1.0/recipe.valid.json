@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "schemaVersion": "0.1.0",
+    "recipeId": "fixture-recipe-0.1.0",
+    "sourceAgent": "codex",
+    "adapterVersion": "0.1.0",
+    "createdAt": "2026-07-14T00:00:00.000Z",
+    "capturedAt": "2026-07-14T00:01:00.000Z",
+    "targetSha256": "a98968c88e185bdd55e69455a605696bdcbb958249bd19c5b653dbe3bea0c549"
+  },
+  "repo": {
+    "remoteFingerprint": null,
+    "baseCommit": "1111111111111111111111111111111111111111",
+    "targetCommit": "2222222222222222222222222222222222222222",
+    "treeFingerprint": "3333333333333333333333333333333333333333"
+  },
+  "instructions": {
+    "prompts": [
+      "Update the greeting."
+    ],
+    "referencedArtifacts": [],
+    "promptRevisions": []
+  },
+  "events": [
+    {
+      "id": "event-001",
+      "type": "prompt",
+      "at": "2026-07-14T00:00:01.000Z",
+      "actor": "user",
+      "summary": "Update the greeting.",
+      "inputs": {
+        "prompt": "Update the greeting."
+      }
+    },
+    {
+      "id": "event-002",
+      "type": "test_run",
+      "at": "2026-07-14T00:00:02.000Z",
+      "actor": "agent",
+      "summary": "Run focused test",
+      "command": "node --test",
+      "result": {
+        "exitCode": 0,
+        "durationMs": 42,
+        "adapterExtension": {
+          "runner": "node"
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "finalPatch": "",
+    "touchedFiles": [],
+    "replayResult": {
+      "status": "exact",
+      "consumerExtension": true
+    },
+    "provenanceStatus": "pure_ai"
+  },
+  "privacy": {
+    "redactions": [
+      {
+        "path": "events[0].summary",
+        "matcher": "fixture",
+        "extensionMetadata": {
+          "safe": true
+        }
+      }
+    ],
+    "omittedBlobs": [
+      {
+        "kind": "raw_transcript",
+        "storage": "local_only",
+        "published": false
+      }
+    ],
+    "secretScanFindings": []
+  }
+}

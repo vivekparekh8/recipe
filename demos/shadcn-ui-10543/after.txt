@@ -1,0 +1,18 @@
+Focused regression test:
+  apps/v4/registry/select.test.ts: 2 tests passed
+
+Generated registry checks:
+  Targeted style and registry builds passed for base-vega, base-nova, base-maia,
+  base-lyra, base-mira, base-luma, base-sera, and base-rhea.
+
+Additional verification:
+  apps/v4 TypeScript no-emit check: passed
+  Targeted ESLint: passed
+  Targeted Prettier check: passed
+  git diff --check: passed
+  Radix and lockfile diff scan: clean
+
+Recipe verification:
+  Replay: exact (1/1 checkpoints)
+  Verify: ok, failureCount 0
+  Compact Git bundle: verified with base prerequisite

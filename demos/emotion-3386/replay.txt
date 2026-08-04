@@ -1,0 +1,6 @@
+Replay exact
+  checkpoints: 1/1
+  agent edits: 1/1
+  human edits: 0/0
+  tests:       0/0
+  worktree:    (cleaned up)

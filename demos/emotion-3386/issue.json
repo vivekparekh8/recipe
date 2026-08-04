@@ -1,0 +1,16 @@
+{
+  "repository": "emotion-js/emotion",
+  "url": "https://github.com/emotion-js/emotion/issues/3386",
+  "number": 3386,
+  "title": "@emotion/babel-plugin incompatible with Babel 8",
+  "state": "open",
+  "labels": ["bug", "needs triage"],
+  "comments": 0,
+  "positive_reactions": 4,
+  "checked_at": "2026-07-15T07:53:22Z",
+  "competing_pr_search": {
+    "query": "repo:emotion-js/emotion is:pr 3386",
+    "result_count": 0
+  },
+  "source": "unauthenticated public GitHub REST API"
+}

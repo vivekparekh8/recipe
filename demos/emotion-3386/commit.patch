@@ -1,0 +1,101 @@
+From 2a88c454952318b8efd3e8e95e0e8117f30fc0e4 Mon Sep 17 00:00:00 2001
+From: Recipe Demo <recipe-demo@example.invalid>
+Date: Wed, 15 Jul 2026 00:49:09 -0700
+Subject: [PATCH] fix: support Babel 8 static style hoisting
+
+---
+ .changeset/tidy-dingos-hoist.md               |  5 +++
+ .../babel-plugin/__tests__/babel-8-compat.js  | 42 +++++++++++++++++++
+ packages/babel-plugin/src/core-macro.js       | 16 ++++++-
+ 3 files changed, 61 insertions(+), 2 deletions(-)
+ create mode 100644 .changeset/tidy-dingos-hoist.md
+ create mode 100644 packages/babel-plugin/__tests__/babel-8-compat.js
+
+diff --git a/.changeset/tidy-dingos-hoist.md b/.changeset/tidy-dingos-hoist.md
+new file mode 100644
+index 00000000..cf3f34ea
+--- /dev/null
++++ b/.changeset/tidy-dingos-hoist.md
+@@ -0,0 +1,5 @@
++---
++'@emotion/babel-plugin': patch
++---
++
++Fix static style hoisting when transforming with Babel 8.
+diff --git a/packages/babel-plugin/__tests__/babel-8-compat.js b/packages/babel-plugin/__tests__/babel-8-compat.js
+new file mode 100644
+index 00000000..5b5ffeee
+--- /dev/null
++++ b/packages/babel-plugin/__tests__/babel-8-compat.js
+@@ -0,0 +1,42 @@
++import { transformSync } from '@babel/core'
++import { NodePath } from '@babel/traverse'
++import plugin from '@emotion/babel-plugin'
++
++test('hoists function-local static css without NodePath#hoist', () => {
++  const hoist = NodePath.prototype.hoist
++  NodePath.prototype.hoist = undefined
++
++  let code
++  try {
++    code = transformSync(
++      `
++        import { css } from '@emotion/react'
++
++        function getStyles() {
++          const styles = css({ color: 'hotpink' })
++          return styles
++        }
++      `,
++      {
++        babelrc: false,
++        configFile: false,
++        plugins: [[plugin, { autoLabel: 'never', sourceMap: false }]]
++      }
++    ).code
++  } finally {
++    NodePath.prototype.hoist = hoist
++  }
++
++  expect(code).toMatch(/var (_ref\d*) = process\.env\.NODE_ENV/)
++  const hoistedName = code.match(/var (_ref\d*) =/)[1]
++  expect(code).toContain(`const styles = ${hoistedName};`)
++
++  const getStyles = new Function(
++    'process',
++    `${code.replace(/import[^;]+;/, '')}; return getStyles;`
++  )({ env: { NODE_ENV: 'production' } })
++  const first = getStyles()
++
++  expect(first).toEqual({ name: '3sn2xs', styles: 'color:hotpink' })
++  expect(getStyles()).toBe(first)
++})
+diff --git a/packages/babel-plugin/src/core-macro.js b/packages/babel-plugin/src/core-macro.js
+index c7f8c769..5eea3cb6 100644
+--- a/packages/babel-plugin/src/core-macro.js
++++ b/packages/babel-plugin/src/core-macro.js
+@@ -22,8 +22,20 @@ export const transformCssCallExpression = (
+     sourceMap
+   })
+   if (node) {
+-    path.replaceWith(node)
+-    path.hoist()
++    if (path.scope !== state.file.scope) {
++      const ref = state.file.scope.generateUidIdentifier('ref')
++      const statement = path.findParent(
++        parent => parent.parentPath && parent.parentPath.isProgram()
++      )
++      statement.insertBefore(
++        babel.types.variableDeclaration('var', [
++          babel.types.variableDeclarator(ref, node)
++        ])
++      )
++      path.replaceWith(babel.types.cloneNode(ref))
++    } else {
++      path.replaceWith(node)
++    }
+   } else if (annotateAsPure && path.isCallExpression()) {
+     path.addComment('leading', '#__PURE__')
+   }
+-- 
+2.32.1 (Apple Git-133)

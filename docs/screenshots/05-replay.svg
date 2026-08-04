@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="334" viewBox="0 0 1220 334">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101714"/>
+      <stop offset="1" stop-color="#17231d"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#07100b" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="1220" height="334" fill="#e7e0d0"/>
+  <rect x="22" y="20" width="1176" height="292" rx="15" fill="url(#bg)" filter="url(#shadow)"/>
+  <rect x="22" y="20" width="1176" height="48" rx="15" fill="#24332b"/>
+  <rect x="22" y="53" width="1176" height="15" fill="#24332b"/>
+  <circle cx="47" cy="44" r="6" fill="#ef6a62"/>
+  <circle cx="67" cy="44" r="6" fill="#f4c95d"/>
+  <circle cx="87" cy="44" r="6" fill="#79c98c"/>
+  <text x="410" y="49" fill="#bcd0c3" font-family="Menlo, Monaco, monospace" font-size="14">recipe replay: exact</text>
+  <text x="46" y="92" fill="#f4c95d" font-family="Menlo, Monaco, monospace" font-size="14.5" xml:space="preserve">$ recipe replay HEAD</text>
+  <text x="46" y="113" fill="#dce7df" font-family="Menlo, Monaco, monospace" font-size="14.5" xml:space="preserve"></text>
+  <text x="46" y="134" fill="#dce7df" font-family="Menlo, Monaco, monospace" font-size="14.5" xml:space="preserve">Replay exact</text>
+  <text x="46" y="155" fill="#dce7df" font-family="Menlo, Monaco, monospace" font-size="14.5" xml:space="preserve">  checkpoints: 1/1</text>
+  <text x="46" y="176" fill="#dce7df" font-family="Menlo, Monaco, monospace" font-size="14.5" xml:space="preserve">  agent edits: 1/1</text>
+  <text x="46" y="197" fill="#dce7df" font-family="Menlo, Monaco, monospace" font-size="14.5" xml:space="preserve">  human edits: 0/0</text>
+  <text x="46" y="218" fill="#dce7df" font-family="Menlo, Monaco, monospace" font-size="14.5" xml:space="preserve">  tests:       1/1</text>
+  <text x="46" y="239" fill="#dce7df" font-family="Menlo, Monaco, monospace" font-size="14.5" xml:space="preserve">  worktree:    (cleaned up)</text>
+  <text x="46" y="260" fill="#dce7df" font-family="Menlo, Monaco, monospace" font-size="14.5" xml:space="preserve">  test node -e &quot;import(&apos;./calc.js&apos;).then(m =&gt; process.exit(m.calc() === 42 ? 0 : 1))&quot;</text>
+  <text x="46" y="281" fill="#dce7df" font-family="Menlo, Monaco, monospace" font-size="14.5" xml:space="preserve">  -&gt; 0 (matched)</text>
+</svg>

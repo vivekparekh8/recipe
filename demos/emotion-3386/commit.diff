@@ -1,0 +1,86 @@
+diff --git a/.changeset/tidy-dingos-hoist.md b/.changeset/tidy-dingos-hoist.md
+new file mode 100644
+index 00000000..cf3f34ea
+--- /dev/null
++++ b/.changeset/tidy-dingos-hoist.md
+@@ -0,0 +1,5 @@
++---
++'@emotion/babel-plugin': patch
++---
++
++Fix static style hoisting when transforming with Babel 8.
+diff --git a/packages/babel-plugin/__tests__/babel-8-compat.js b/packages/babel-plugin/__tests__/babel-8-compat.js
+new file mode 100644
+index 00000000..5b5ffeee
+--- /dev/null
++++ b/packages/babel-plugin/__tests__/babel-8-compat.js
+@@ -0,0 +1,42 @@
++import { transformSync } from '@babel/core'
++import { NodePath } from '@babel/traverse'
++import plugin from '@emotion/babel-plugin'
++
++test('hoists function-local static css without NodePath#hoist', () => {
++  const hoist = NodePath.prototype.hoist
++  NodePath.prototype.hoist = undefined
++
++  let code
++  try {
++    code = transformSync(
++      `
++        import { css } from '@emotion/react'
++
++        function getStyles() {
++          const styles = css({ color: 'hotpink' })
++          return styles
++        }
++      `,
++      {
++        babelrc: false,
++        configFile: false,
++        plugins: [[plugin, { autoLabel: 'never', sourceMap: false }]]
++      }
++    ).code
++  } finally {
++    NodePath.prototype.hoist = hoist
++  }
++
++  expect(code).toMatch(/var (_ref\d*) = process\.env\.NODE_ENV/)
++  const hoistedName = code.match(/var (_ref\d*) =/)[1]
++  expect(code).toContain(`const styles = ${hoistedName};`)
++
++  const getStyles = new Function(
++    'process',
++    `${code.replace(/import[^;]+;/, '')}; return getStyles;`
++  )({ env: { NODE_ENV: 'production' } })
++  const first = getStyles()
++
++  expect(first).toEqual({ name: '3sn2xs', styles: 'color:hotpink' })
++  expect(getStyles()).toBe(first)
++})
+diff --git a/packages/babel-plugin/src/core-macro.js b/packages/babel-plugin/src/core-macro.js
+index c7f8c769..5eea3cb6 100644
+--- a/packages/babel-plugin/src/core-macro.js
++++ b/packages/babel-plugin/src/core-macro.js
+@@ -22,8 +22,20 @@ export const transformCssCallExpression = (
+     sourceMap
+   })
+   if (node) {
+-    path.replaceWith(node)
+-    path.hoist()
++    if (path.scope !== state.file.scope) {
++      const ref = state.file.scope.generateUidIdentifier('ref')
++      const statement = path.findParent(
++        parent => parent.parentPath && parent.parentPath.isProgram()
++      )
++      statement.insertBefore(
++        babel.types.variableDeclaration('var', [
++          babel.types.variableDeclarator(ref, node)
++        ])
++      )
++      path.replaceWith(babel.types.cloneNode(ref))
++    } else {
++      path.replaceWith(node)
++    }
+   } else if (annotateAsPure && path.isCallExpression()) {
+     path.addComment('leading', '#__PURE__')
+   }

@@ -1,0 +1,288 @@
+{
+  "ok": true,
+  "ref": "HEAD",
+  "bundlePath": "<DEMO_WORKSPACE>/.git/recipes/50fd7bf22fcce9c9843a8f940d7a59f3d7b36732.json.zst",
+  "recipeId": "e3c22a53-36a6-4ba4-b7ae-c9eb3f26a569",
+  "targetCommit": "50fd7bf22fcce9c9843a8f940d7a59f3d7b36732",
+  "attached": true,
+  "checks": [
+    {
+      "id": "bundle.path",
+      "ok": true,
+      "level": "error",
+      "message": "Resolved recipe bundle at <DEMO_WORKSPACE>/.git/recipes/50fd7bf22fcce9c9843a8f940d7a59f3d7b36732.json.zst.",
+      "path": "<DEMO_WORKSPACE>/.git/recipes/50fd7bf22fcce9c9843a8f940d7a59f3d7b36732.json.zst"
+    },
+    {
+      "id": "bundle.schema",
+      "ok": true,
+      "level": "error",
+      "message": "Recipe bundle conforms to the published schema."
+    },
+    {
+      "id": "bundle.target_sha256",
+      "ok": true,
+      "level": "error",
+      "message": "Bundle target SHA-256 matches the canonical recipe payload.",
+      "expected": "c191f51e0873f9505e5f7aa0e93b90571cb9f6a1c60d0532b3138f79aa73c073",
+      "actual": "c191f51e0873f9505e5f7aa0e93b90571cb9f6a1c60d0532b3138f79aa73c073"
+    },
+    {
+      "id": "attachment.present",
+      "ok": true,
+      "level": "error",
+      "message": "Found attached recipe note in refs/notes/recipe.",
+      "notesRef": "refs/notes/recipe"
+    },
+    {
+      "id": "attachment.recipe_id",
+      "ok": true,
+      "level": "error",
+      "message": "Recipe-Id matches the recipe bundle.",
+      "expected": "e3c22a53-36a6-4ba4-b7ae-c9eb3f26a569",
+      "actual": "e3c22a53-36a6-4ba4-b7ae-c9eb3f26a569"
+    },
+    {
+      "id": "attachment.recipe_base",
+      "ok": true,
+      "level": "error",
+      "message": "Recipe-Base matches the recipe bundle.",
+      "expected": "bc0705384b51252af26dcc65425b216bf5eb063c",
+      "actual": "bc0705384b51252af26dcc65425b216bf5eb063c"
+    },
+    {
+      "id": "attachment.recipe_sha256",
+      "ok": true,
+      "level": "error",
+      "message": "Recipe-SHA256 matches the recipe bundle.",
+      "expected": "c191f51e0873f9505e5f7aa0e93b90571cb9f6a1c60d0532b3138f79aa73c073",
+      "actual": "c191f51e0873f9505e5f7aa0e93b90571cb9f6a1c60d0532b3138f79aa73c073"
+    },
+    {
+      "id": "attachment.recipe_status",
+      "ok": true,
+      "level": "error",
+      "message": "Recipe-Status matches the recipe bundle.",
+      "expected": "pure_ai",
+      "actual": "pure_ai"
+    },
+    {
+      "id": "attachment.recipe_notes_ref",
+      "ok": true,
+      "level": "error",
+      "message": "Recipe-Notes-Ref matches the recipe bundle.",
+      "expected": "refs/notes/recipe",
+      "actual": "refs/notes/recipe"
+    },
+    {
+      "id": "attachment.bundle_field",
+      "ok": true,
+      "level": "warning",
+      "message": "Attachment note points at the canonical bundle.",
+      "path": "<DEMO_WORKSPACE>/.git/recipes/50fd7bf22fcce9c9843a8f940d7a59f3d7b36732.json.zst"
+    },
+    {
+      "id": "attachment.bundle_path",
+      "ok": true,
+      "level": "warning",
+      "message": "Attached bundle exists at <DEMO_WORKSPACE>/.git/recipes/50fd7bf22fcce9c9843a8f940d7a59f3d7b36732.json.zst.",
+      "path": "<DEMO_WORKSPACE>/.git/recipes/50fd7bf22fcce9c9843a8f940d7a59f3d7b36732.json.zst"
+    },
+    {
+      "id": "attachment.bundle_readable",
+      "ok": true,
+      "level": "warning",
+      "message": "Attached bundle is readable and valid JSON.",
+      "path": "<DEMO_WORKSPACE>/.git/recipes/50fd7bf22fcce9c9843a8f940d7a59f3d7b36732.json.zst"
+    },
+    {
+      "id": "attachment.bundle_integrity",
+      "ok": true,
+      "level": "error",
+      "message": "Attached bundle passes its own target SHA-256 integrity check."
+    },
+    {
+      "id": "attachment.bundle_matches",
+      "ok": true,
+      "level": "error",
+      "message": "Attached bundle matches the resolved recipe."
+    },
+    {
+      "id": "attachment.artifact_field",
+      "ok": true,
+      "level": "error",
+      "message": "Attachment note points at the published artifact copy.",
+      "path": "<DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe.json.zst"
+    },
+    {
+      "id": "attachment.artifact_path",
+      "ok": true,
+      "level": "error",
+      "message": "Published artifact exists at <DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe.json.zst.",
+      "path": "<DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe.json.zst"
+    },
+    {
+      "id": "attachment.artifact_readable",
+      "ok": true,
+      "level": "error",
+      "message": "Published artifact is readable and valid JSON.",
+      "path": "<DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe.json.zst"
+    },
+    {
+      "id": "attachment.artifact_integrity",
+      "ok": true,
+      "level": "error",
+      "message": "Published artifact passes its own target SHA-256 integrity check."
+    },
+    {
+      "id": "attachment.artifact_matches",
+      "ok": true,
+      "level": "error",
+      "message": "Published artifact matches the resolved recipe."
+    },
+    {
+      "id": "attachment.artifact_url",
+      "ok": false,
+      "level": "warning",
+      "message": "Attachment note is missing Recipe-Artifact-Url.",
+      "url": null
+    },
+    {
+      "id": "attachment.release_tag",
+      "ok": false,
+      "level": "warning",
+      "message": "Attachment note is missing Recipe-Release-Tag.",
+      "tag": null
+    },
+    {
+      "id": "attachment.release_url",
+      "ok": false,
+      "level": "warning",
+      "message": "Attachment note is missing Recipe-Release-Url.",
+      "url": null
+    },
+    {
+      "id": "attachment.trailer_field",
+      "ok": true,
+      "level": "error",
+      "message": "Attachment note points at the trailer artifact.",
+      "path": "<DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.trailers.txt"
+    },
+    {
+      "id": "attachment.trailer_path",
+      "ok": true,
+      "level": "error",
+      "message": "Trailer artifact exists at <DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.trailers.txt.",
+      "path": "<DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.trailers.txt"
+    },
+    {
+      "id": "attachment.trailer_matches",
+      "ok": true,
+      "level": "error",
+      "message": "Trailer artifact matches the recipe bundle.",
+      "expected": "Recipe-Id: e3c22a53-36a6-4ba4-b7ae-c9eb3f26a569\nRecipe-Base: bc0705384b51252af26dcc65425b216bf5eb063c\nRecipe-SHA256: c191f51e0873f9505e5f7aa0e93b90571cb9f6a1c60d0532b3138f79aa73c073\nRecipe-Status: pure_ai",
+      "actual": "Recipe-Id: e3c22a53-36a6-4ba4-b7ae-c9eb3f26a569\nRecipe-Base: bc0705384b51252af26dcc65425b216bf5eb063c\nRecipe-SHA256: c191f51e0873f9505e5f7aa0e93b90571cb9f6a1c60d0532b3138f79aa73c073\nRecipe-Status: pure_ai"
+    },
+    {
+      "id": "attachment.summary_field",
+      "ok": true,
+      "level": "warning",
+      "message": "Attachment note points at the markdown summary.",
+      "path": "<DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe.md"
+    },
+    {
+      "id": "attachment.summary_path",
+      "ok": true,
+      "level": "warning",
+      "message": "Summary artifact exists at <DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe.md.",
+      "path": "<DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe.md"
+    },
+    {
+      "id": "attachment.summary_url",
+      "ok": false,
+      "level": "warning",
+      "message": "Attachment note is missing Recipe-Summary-Url.",
+      "url": null
+    },
+    {
+      "id": "attachment.comment_field",
+      "ok": true,
+      "level": "warning",
+      "message": "Attachment note points at the review comment artifact.",
+      "path": "<DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe-comment.md"
+    },
+    {
+      "id": "attachment.comment_path",
+      "ok": true,
+      "level": "warning",
+      "message": "Review comment artifact exists at <DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe-comment.md.",
+      "path": "<DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe-comment.md"
+    },
+    {
+      "id": "attachment.manifest_field",
+      "ok": true,
+      "level": "warning",
+      "message": "Attachment note points at the publish manifest.",
+      "path": "<DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe-publish.json"
+    },
+    {
+      "id": "attachment.manifest_path",
+      "ok": true,
+      "level": "warning",
+      "message": "Publish manifest exists at <DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe-publish.json.",
+      "path": "<DEMO_WORKSPACE>/.git/recipe-publish/50fd7bf22fcc.recipe-publish.json"
+    },
+    {
+      "id": "attachment.manifest_url",
+      "ok": false,
+      "level": "warning",
+      "message": "Attachment note is missing Recipe-Manifest-Url.",
+      "url": null
+    },
+    {
+      "id": "replay.checkpoints",
+      "ok": true,
+      "level": "error",
+      "message": "Replay applied every captured checkpoint.",
+      "expected": 1,
+      "actual": 1,
+      "failedCheckpoint": null
+    },
+    {
+      "id": "replay.diff",
+      "ok": true,
+      "level": "error",
+      "message": "Replay landed on the exact captured target.",
+      "actual": "exact"
+    },
+    {
+      "id": "replay.tests",
+      "ok": true,
+      "level": "error",
+      "message": "Replay reproduced every recorded test outcome.",
+      "expected": 0,
+      "actual": 0
+    }
+  ],
+  "warningCount": 5,
+  "failureCount": 0,
+  "replay": {
+    "status": "exact",
+    "appliedCheckpoints": 1,
+    "totalCheckpoints": 1,
+    "appliedAgentCheckpoints": 1,
+    "totalAgentCheckpoints": 1,
+    "appliedHumanEdits": 0,
+    "totalHumanEdits": 0,
+    "matchedTests": 0,
+    "totalTests": 0,
+    "failedCheckpoint": null
+  },
+  "resolved": {
+    "kind": "direct",
+    "input": "HEAD",
+    "resolvedRef": "HEAD",
+    "source": "direct",
+    "metadata": null
+  }
+}

@@ -1,0 +1,162 @@
+From ae3853d5c903aaf19a7699fcdbe136e9bd838fb2 Mon Sep 17 00:00:00 2001
+From: Recipe Demo <recipe-demo@example.invalid>
+Date: Wed, 15 Jul 2026 00:31:00 -0700
+Subject: [PATCH] fix: correct horizontal SpeedDial tooltip placement
+
+---
+ .../mui-material/src/SpeedDial/SpeedDial.js   |  2 +-
+ .../src/SpeedDial/SpeedDial.test.js           | 21 +++++++++++++--
+ .../src/SpeedDialAction/SpeedDialAction.js    | 24 +++++++++++++++++
+ .../SpeedDialAction/SpeedDialAction.test.js   | 27 +++++++++++++++++++
+ .../SpeedDialAction/speedDialActionClasses.ts |  6 +++++
+ 5 files changed, 77 insertions(+), 3 deletions(-)
+
+diff --git a/packages/mui-material/src/SpeedDial/SpeedDial.js b/packages/mui-material/src/SpeedDial/SpeedDial.js
+index 65b815b6..10ea5b00 100644
+--- a/packages/mui-material/src/SpeedDial/SpeedDial.js
++++ b/packages/mui-material/src/SpeedDial/SpeedDial.js
+@@ -374,7 +374,7 @@ const SpeedDial = React.forwardRef(function SpeedDial(inProps, ref) {
+     const { fab: { ref: fabSlotOrigButtonRef, ...fabSlotProps } = {}, ...restOfSlotProps } =
+       childSlotProps;
+ 
+-    const defaultPlacement = getOrientation(direction) === 'vertical' ? 'left' : 'top';
++    const defaultPlacement = getOrientation(direction) === 'vertical' ? 'left' : 'bottom';
+ 
+     return React.cloneElement(child, {
+       slotProps: {
+diff --git a/packages/mui-material/src/SpeedDial/SpeedDial.test.js b/packages/mui-material/src/SpeedDial/SpeedDial.test.js
+index 9ed01bbb..f918b707 100644
+--- a/packages/mui-material/src/SpeedDial/SpeedDial.test.js
++++ b/packages/mui-material/src/SpeedDial/SpeedDial.test.js
+@@ -175,8 +175,8 @@ describe('<SpeedDial />', () => {
+     [
+       ['up', 'tooltipPlacementLeft'],
+       ['down', 'tooltipPlacementLeft'],
+-      ['left', 'tooltipPlacementTop'],
+-      ['right', 'tooltipPlacementTop'],
++      ['left', 'tooltipPlacementBottom'],
++      ['right', 'tooltipPlacementBottom'],
+     ].forEach(([direction, className]) => {
+       it(`should place the tooltip in the correct position when direction=${direction}`, () => {
+         render(
+@@ -192,6 +192,23 @@ describe('<SpeedDial />', () => {
+         expect(screen.getByRole('tooltip').firstChild).to.have.class(tooltipClasses[className]);
+       });
+     });
++
++    it('should allow the tooltip placement to override the direction default', () => {
++      render(
++        <SpeedDial {...defaultProps} direction="right">
++          <SpeedDialAction
++            icon={icon}
++            slotProps={{ tooltip: { placement: 'top', title: 'action1' } }}
++          />
++        </SpeedDial>,
++      );
++
++      fireEvent.mouseOver(screen.getByRole('menuitem'));
++      clock.runAll();
++      expect(screen.getByRole('tooltip').firstChild).to.have.class(
++        tooltipClasses.tooltipPlacementTop,
++      );
++    });
+   });
+ 
+   describe('keyboard', () => {
+diff --git a/packages/mui-material/src/SpeedDialAction/SpeedDialAction.js b/packages/mui-material/src/SpeedDialAction/SpeedDialAction.js
+index 86c6a96f..3eb82769 100644
+--- a/packages/mui-material/src/SpeedDialAction/SpeedDialAction.js
++++ b/packages/mui-material/src/SpeedDialAction/SpeedDialAction.js
+@@ -125,6 +125,30 @@ const SpeedDialActionStaticTooltip = styled('span', {
+           },
+         },
+       },
++      {
++        props: {
++          tooltipPlacement: 'top',
++        },
++        style: {
++          [`& .${speedDialActionClasses.staticTooltipLabel}`]: {
++            transformOrigin: '50% 100%',
++            bottom: '100%',
++            marginBottom: 8,
++          },
++        },
++      },
++      {
++        props: {
++          tooltipPlacement: 'bottom',
++        },
++        style: {
++          [`& .${speedDialActionClasses.staticTooltipLabel}`]: {
++            transformOrigin: '50% 0%',
++            top: '100%',
++            marginTop: 8,
++          },
++        },
++      },
+     ],
+   })),
+ );
+diff --git a/packages/mui-material/src/SpeedDialAction/SpeedDialAction.test.js b/packages/mui-material/src/SpeedDialAction/SpeedDialAction.test.js
+index 1529ed04..50371dee 100644
+--- a/packages/mui-material/src/SpeedDialAction/SpeedDialAction.test.js
++++ b/packages/mui-material/src/SpeedDialAction/SpeedDialAction.test.js
+@@ -199,6 +199,33 @@ describe('<SpeedDialAction />', () => {
+     expect(staticToolTipLabel).to.have.class(classes.staticTooltipLabel);
+   });
+ 
++  [
++    [
++      'top',
++      classes.tooltipPlacementTop,
++      { bottom: '100%', marginBottom: '8px', transformOrigin: '50% 100%' },
++    ],
++    [
++      'bottom',
++      classes.tooltipPlacementBottom,
++      { top: '100%', marginTop: '8px', transformOrigin: '50% 0%' },
++    ],
++  ].forEach(([placement, placementClass, expectedStyle]) => {
++    it(`should position a static tooltip at the ${placement}`, () => {
++      const { container } = render(
++        <SpeedDialAction
++          icon={<Icon>add</Icon>}
++          slotProps={{ tooltip: { open: true, placement, title: 'placeholder' } }}
++        />,
++      );
++
++      const staticTooltip = container.querySelector(`.${classes.staticTooltip}`);
++      const staticTooltipLabel = container.querySelector(`.${classes.staticTooltipLabel}`);
++      expect(staticTooltip).to.have.class(placementClass);
++      expect(staticTooltipLabel).toHaveComputedStyle(expectedStyle);
++    });
++  });
++
+   it('should have staticToolTip and staticToolTipLabel classes if slotProps.tooltip.open is true and custom slots are provided', () => {
+     const CustomStaticTooltip = React.forwardRef(({ ownerState, ...props }, ref) => (
+       <div {...props} ref={ref}>
+diff --git a/packages/mui-material/src/SpeedDialAction/speedDialActionClasses.ts b/packages/mui-material/src/SpeedDialAction/speedDialActionClasses.ts
+index 500cb4d7..769657d3 100644
+--- a/packages/mui-material/src/SpeedDialAction/speedDialActionClasses.ts
++++ b/packages/mui-material/src/SpeedDialAction/speedDialActionClasses.ts
+@@ -16,6 +16,10 @@ export interface SpeedDialActionClasses {
+   tooltipPlacementLeft: string;
+   /** Styles applied to the root element if `tooltipOpen={true}` and `tooltipPlacement="right"`` */
+   tooltipPlacementRight: string;
++  /** Styles applied to the root element if `tooltipOpen={true}` and `tooltipPlacement="top"`` */
++  tooltipPlacementTop: string;
++  /** Styles applied to the root element if `tooltipOpen={true}` and `tooltipPlacement="bottom"`` */
++  tooltipPlacementBottom: string;
+ }
+ 
+ export type SpeedDialActionClassKey = keyof SpeedDialActionClasses;
+@@ -34,6 +38,8 @@ const speedDialActionClasses: SpeedDialActionClasses = generateUtilityClasses(
+     'staticTooltipLabel',
+     'tooltipPlacementLeft',
+     'tooltipPlacementRight',
++    'tooltipPlacementTop',
++    'tooltipPlacementBottom',
+   ],
+ );
+ 

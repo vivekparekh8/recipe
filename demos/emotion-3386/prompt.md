@@ -1,0 +1,7 @@
+# Implementation prompt
+
+Fix https://github.com/emotion-js/emotion/issues/3386 in this checkout. The issue is reproducible with @babel/core 8.0.1 and @emotion/babel-plugin 11.13.5: transforming a function-local static call such as `const styles = css({ color: 'hotpink' })` throws `TypeError: path.hoist is not a function` from transformCssCallExpression because Babel 8 removed NodePath#hoist.
+
+Follow CONTRIBUTING.md and repository conventions. Keep the fix narrowly scoped to @emotion/babel-plugin. Use strict TDD: first add a focused regression test that simulates Babel 8's missing `path.hoist` API while proving a function-local static css call remains hoisted safely and output semantics are preserved. Then implement the smallest compatibility fix that works with both Babel 7 and Babel 8 without depending on removed APIs. Prefer Babel-supported scope/path operations and preserve existing static extraction and hoisting behavior. Add a patch changeset for @emotion/babel-plugin with concise consumer-facing wording.
+
+Run the smallest authoritative Babel plugin test first, then the complete @emotion/babel-plugin test set and relevant lint for changed files if practical. Do not alter yarn.lock, generated files, snapshots unrelated to the regression, or other packages. Do not weaken tests or suppress errors. Do not commit; Recipe will create the final commit. At the end, report changed files and exact commands/results.

@@ -1,0 +1,33 @@
+# Environment
+node --version
+COREPACK_HOME=<TEMP_COREPACK> corepack pnpm install --frozen-lockfile
+node <RECIPE_SOURCE>/src/cli.js run --help
+codex --help
+codex exec --help
+
+# Branch and Recipe initialization
+git switch -c recipe-demo/10543-align-base-select-popup bc0705384b51252af26dcc65425b216bf5eb063c
+node <RECIPE_SOURCE>/src/cli.js init
+
+# Before reproduction (exit 1 before the fix)
+node -e "const fs=require('fs');const s=fs.readFileSync('apps/v4/styles/base-luma/ui/select.tsx','utf8');console.log('Issue #10543 source reproduction');console.log('Base Luma popup width: exactly --anchor-width');if(!s.includes('data-[side=none]:min-w-[calc(var(--anchor-width)+--spacing(7))]')){console.error('FAIL: alignItemWithTrigger popup width does not compensate for aligned-item horizontal inset');process.exit(1)}"
+
+# Agent capture; prompt is the exact content of prompt.md.
+# This first child argv ordering exited 2 without edits and left the Recipe resumable.
+node <RECIPE_SOURCE>/src/cli.js run --commit --message "fix: align Base UI select popup with trigger" --prompt "<EXACT_PROMPT_FROM_prompt.md>" -- codex exec --ephemeral --ignore-user-config --ask-for-approval never --sandbox workspace-write "<EXACT_PROMPT_FROM_prompt.md>"
+
+# The corrected argv resumed the same Recipe; this run succeeded and Recipe committed.
+node <RECIPE_SOURCE>/src/cli.js run --resume --commit --message "fix: align Base UI select popup with trigger" --prompt "<EXACT_PROMPT_FROM_prompt.md>" -- codex --ask-for-approval never --sandbox workspace-write exec --ephemeral --ignore-user-config "<EXACT_PROMPT_FROM_prompt.md>"
+
+# Focused and repository checks
+./node_modules/.bin/vitest run apps/v4/registry/select.test.ts
+cd apps/v4
+./node_modules/.bin/tsc --noEmit
+./node_modules/.bin/eslint registry/bases/base/ui/select.tsx registry/select.test.ts styles/base-{vega,nova,maia,lyra,mira,luma,sera,rhea}/ui/select.tsx styles/base-nova/ui-rtl/select.tsx
+./node_modules/.bin/prettier --check registry/bases/base/ui/select.tsx registry/select.test.ts styles/base-{vega,nova,maia,lyra,mira,luma,sera,rhea}/ui/select.tsx styles/base-nova/ui-rtl/select.tsx public/r/styles/base-{vega,nova,maia,lyra,mira,luma,sera,rhea}/select.json
+
+# Recipe gates
+node <RECIPE_SOURCE>/src/cli.js status
+node <RECIPE_SOURCE>/src/cli.js inspect HEAD --timeline
+node <RECIPE_SOURCE>/src/cli.js replay HEAD
+node <RECIPE_SOURCE>/src/cli.js verify HEAD --replay --json

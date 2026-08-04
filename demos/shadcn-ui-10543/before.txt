@@ -1,0 +1,4 @@
+Issue #10543 source reproduction
+Base Luma popup width: exactly --anchor-width
+FAIL: alignItemWithTrigger popup width does not compensate for aligned-item horizontal inset
+Exit code: 1

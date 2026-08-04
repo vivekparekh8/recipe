@@ -1,0 +1,27 @@
+Target: ae3853d5c903aaf19a7699fcdbe136e9bd838fb2
+
+Regression contract (exit 0):
+Issue #41067 regression contract passes.
+
+Command:
+pnpm test:node SpeedDial --run
+
+Output (exit 0):
+Test Files  3 passed (3)
+Tests       113 passed | 20 skipped (133)
+
+Formatting:
+All matched files use Prettier code style.
+
+File-scoped ESLint:
+Passed with no output.
+
+TypeScript in captured Codex run:
+./node_modules/.bin/tsc -p packages/mui-material/tsconfig.json --noEmit
+Passed with no output.
+
+Independent TypeScript rerun:
+Exited 134 after approximately four minutes because Node exhausted its 2 GB heap. No TypeScript diagnostic was emitted before the environment failure.
+
+Diff check:
+Passed with no whitespace errors.

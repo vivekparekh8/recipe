@@ -1,0 +1,30 @@
+[
+  {
+    "kind": "prompt",
+    "actor": "user",
+    "prompt": "Update the greeting."
+  },
+  {
+    "kind": "tool",
+    "actor": "agent",
+    "toolName": "apply_patch",
+    "inputs": {
+      "path": "greeting.js"
+    },
+    "outputs": {
+      "ok": true,
+      "adapterExtension": "retained"
+    },
+    "checkpoint": true,
+    "checkpointEventType": "file_edit_checkpoint"
+  },
+  {
+    "kind": "test",
+    "command": "node --test",
+    "execute": true,
+    "result": {
+      "exitCode": 0,
+      "durationMs": 42
+    }
+  }
+]

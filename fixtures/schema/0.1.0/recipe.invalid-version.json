@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "schemaVersion": "0.2.0",
+    "recipeId": "incompatible-fixture",
+    "sourceAgent": "codex",
+    "adapterVersion": "0.2.0",
+    "createdAt": "2026-07-14T00:00:00.000Z",
+    "capturedAt": "2026-07-14T00:01:00.000Z",
+    "targetSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "repo": {
+    "remoteFingerprint": null,
+    "baseCommit": "1111111111111111111111111111111111111111",
+    "targetCommit": "2222222222222222222222222222222222222222",
+    "treeFingerprint": null
+  },
+  "instructions": {
+    "prompts": [],
+    "referencedArtifacts": [],
+    "promptRevisions": []
+  },
+  "events": [],
+  "outputs": {
+    "finalPatch": "",
+    "touchedFiles": [],
+    "replayResult": null,
+    "provenanceStatus": "unknown"
+  },
+  "privacy": {
+    "redactions": [],
+    "omittedBlobs": [],
+    "secretScanFindings": []
+  }
+}
