@@ -45,7 +45,7 @@ recipe run --abort
 
 ## Current scope
 
-This repository is currently in private preview while the launch package receives its final review.
+This repository is a public early preview; the CLI and schema remain experimental until 1.0.
 
 - Bundles are stored in `.git/recipes/<target-commit>.json.zst`
 - `recipe init` stores local configuration under `.git/recipe/` and composes a managed block into the effective shell `post-commit` hook without changing `core.hooksPath`
