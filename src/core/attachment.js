@@ -1,4 +1,5 @@
 import path from "node:path";
+import { realpath } from "node:fs/promises";
 
 import { readGitNote, resolveRepoRoot, writeGitNote } from "./git.js";
 import { buildTrailerBlock } from "./recipe.js";
@@ -88,8 +89,21 @@ export async function attachRecipeToCommit(
     notesRef = DEFAULT_NOTES_REF,
   } = {},
 ) {
-  const repoRoot = await resolveRepoRoot(cwd);
-  const note = buildAttachmentNote(recipe, artifactPaths, {
+  const repoRoot = await realpath(await resolveRepoRoot(cwd));
+  const canonicalArtifactPaths = { ...artifactPaths };
+  for (const key of [
+    "bundlePath",
+    "summaryPath",
+    "trailerPath",
+    "artifactPath",
+    "commentPath",
+    "manifestPath",
+  ]) {
+    if (artifactPaths[key]) {
+      canonicalArtifactPaths[key] = await realpath(artifactPaths[key]);
+    }
+  }
+  const note = buildAttachmentNote(recipe, canonicalArtifactPaths, {
     repoRoot,
     notesRef,
   });
