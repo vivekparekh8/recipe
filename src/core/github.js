@@ -128,10 +128,15 @@ export function parseRecipePullRequestComment(comment) {
 }
 
 export async function runGh(args, { cwd, env } = {}) {
+  const commandEnv = env ? { ...process.env, ...env } : process.env;
+  const executable = commandEnv.RECIPE_GH_EXECUTABLE || "gh";
+  const executableArgs = commandEnv.RECIPE_GH_SCRIPT
+    ? [commandEnv.RECIPE_GH_SCRIPT, ...args]
+    : args;
   try {
-    const result = await execFileAsync("gh", args, {
+    const result = await execFileAsync(executable, executableArgs, {
       cwd,
-      env: env ? { ...process.env, ...env } : process.env,
+      env: commandEnv,
       maxBuffer: 20 * 1024 * 1024,
     });
     return {

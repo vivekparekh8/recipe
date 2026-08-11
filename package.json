@@ -2,6 +2,14 @@
   "name": "recipe",
   "version": "0.1.0",
   "description": "Replayable source maps for AI-assisted commits.",
+  "keywords": [
+    "ai",
+    "agents",
+    "git",
+    "provenance",
+    "replay",
+    "developer-tools"
+  ],
   "type": "module",
   "bin": {
     "recipe": "./src/cli.js"

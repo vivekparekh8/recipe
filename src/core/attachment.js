@@ -7,7 +7,7 @@ export const DEFAULT_NOTES_REF = "refs/notes/recipe";
 
 function repoRelative(filePath, repoRoot) {
   const relative = path.relative(repoRoot, filePath);
-  return relative === "" ? "." : relative;
+  return relative === "" ? "." : relative.replace(/\\/g, "/");
 }
 
 export function parseAttachmentNote(note) {
@@ -136,7 +136,7 @@ export async function resolveAttachmentPaths(
   const repoRoot = await resolveRepoRoot(cwd);
   const resolveField = (key) => {
     const value = attachment.fields[key];
-    return value ? path.resolve(repoRoot, value) : null;
+    return value ? path.resolve(repoRoot, ...value.split("/")) : null;
   };
 
   return {

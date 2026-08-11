@@ -39,10 +39,14 @@ test("hook uninstall restores a no-newline hook and its original mode", async ()
   await writeFile(hookPath, "#!/bin/sh", "utf8");
   await chmod(hookPath, 0o644);
   await runCli(repoDir, ["hooks", "install"]);
-  assert.notEqual((await stat(hookPath)).mode & 0o111, 0);
+  if (process.platform !== "win32") {
+    assert.notEqual((await stat(hookPath)).mode & 0o111, 0);
+  }
   await runCli(repoDir, ["hooks", "uninstall"]);
   assert.equal(await readFile(hookPath, "utf8"), "#!/bin/sh");
-  assert.equal((await stat(hookPath)).mode & 0o777, 0o644);
+  if (process.platform !== "win32") {
+    assert.equal((await stat(hookPath)).mode & 0o777, 0o644);
+  }
 });
 
 test("installed post-commit hook preserves existing behavior and attaches an active session", async () => {

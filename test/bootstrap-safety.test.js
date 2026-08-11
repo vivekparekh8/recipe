@@ -10,9 +10,13 @@ import { commitFile, createTempRepo, runCli, runCliResult } from "./helpers.js";
 test("agent detection is PATH-only and supports Windows PATHEXT", async () => {
   const binDir = await mkdtemp(path.join(os.tmpdir(), "recipe-agents-"));
   for (const command of ["codex", "claude", "aider"]) {
-    const filePath = path.join(binDir, command);
-    await writeFile(filePath, "#!/bin/sh\nexit 0\n", "utf8");
-    await chmod(filePath, 0o755);
+    const suffix = process.platform === "win32" ? ".CMD" : "";
+    const filePath = path.join(binDir, `${command}${suffix}`);
+    const contents = process.platform === "win32" ? "@exit /b 0\r\n" : "#!/bin/sh\nexit 0\n";
+    await writeFile(filePath, contents, "utf8");
+    if (process.platform !== "win32") {
+      await chmod(filePath, 0o755);
+    }
   }
   const agents = await detectAgents({ env: { PATH: binDir } });
   assert.deepEqual(agents.map((agent) => agent.name), ["codex", "claude-code", "aider"]);

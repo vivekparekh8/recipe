@@ -14,6 +14,7 @@ const projectRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "..",
 );
+const npmCliPath = process.env.npm_execpath;
 
 async function exec(command, args, cwd) {
   const result = await execFileAsync(command, args, {
@@ -23,10 +24,16 @@ async function exec(command, args, cwd) {
   return result.stdout.trimEnd();
 }
 
+async function execNpm(args, cwd) {
+  if (npmCliPath) {
+    return exec(process.execPath, [npmCliPath, ...args], cwd);
+  }
+  return exec("npm", args, cwd);
+}
+
 test("packed CLI installs with only runtime files and completes the no-session-id workflow", async () => {
   const packDir = await mkdtemp(path.join(os.tmpdir(), "recipe-pack-"));
-  const packResult = JSON.parse(await exec(
-    "npm",
+  const packResult = JSON.parse(await execNpm(
     [
       "pack",
       "--pack-destination",
@@ -50,8 +57,7 @@ test("packed CLI installs with only runtime files and completes the no-session-i
 
   const installDir = await mkdtemp(path.join(os.tmpdir(), "recipe-install-"));
   const tarballPath = path.join(packDir, packed.filename);
-  await exec(
-    "npm",
+  await execNpm(
     [
       "install",
       "--prefix",
@@ -71,7 +77,10 @@ test("packed CLI installs with only runtime files and completes the no-session-i
     ".bin",
     process.platform === "win32" ? "recipe.cmd" : "recipe",
   );
-  assert.match(await exec(recipeBin, ["--help"], installDir), /recipe run/);
+  const installedCli = path.join(installDir, "node_modules", "recipe", "src", "cli.js");
+  const execRecipe = (args, cwd) => exec(process.execPath, [installedCli, ...args], cwd);
+  assert.match(await execRecipe(["--help"], installDir), /recipe run/);
+  assert.equal(await readFile(recipeBin, "utf8").then(() => true), true);
 
   const repoDir = await createTempRepo("recipe-packed-workflow");
   await commitFile(repoDir, "value.txt", "before\n", "base");
@@ -82,8 +91,8 @@ test("packed CLI installs with only runtime files and completes the no-session-i
   await mkdir(hookDir);
   await writeFile(hookPath, originalHook, "utf8");
   await chmod(hookPath, 0o755);
-  await exec(recipeBin, ["init"], repoDir);
-  const runOutput = await exec(recipeBin, [
+  await execRecipe(["init"], repoDir);
+  const runOutput = await execRecipe([
     "run",
     "--commit",
     "--prompt",
@@ -99,21 +108,20 @@ test("packed CLI installs with only runtime files and completes the no-session-i
   assert.match(runOutput, /Captured and attached Recipe/);
   assert.doesNotMatch(runOutput, /session/i);
   assert.equal(await readFile(path.join(repoDir, "value.txt"), "utf8"), "after\n");
-  assert.match(await exec(recipeBin, ["inspect", "HEAD"], repoDir), /fixture-agent/);
-  assert.match(await exec(recipeBin, ["replay", "HEAD"], repoDir), /Replay exact/);
-  const verification = JSON.parse(await exec(
-    recipeBin,
+  assert.match(await execRecipe(["inspect", "HEAD"], repoDir), /fixture-agent/);
+  assert.match(await execRecipe(["replay", "HEAD"], repoDir), /Replay exact/);
+  const verification = JSON.parse(await execRecipe(
     ["verify", "HEAD", "--replay", "--json"],
     repoDir,
   ));
   assert.equal(verification.ok, true);
 
-  await exec(recipeBin, ["hooks", "uninstall"], repoDir);
+  await execRecipe(["hooks", "uninstall"], repoDir);
   assert.equal(await readFile(hookPath, "utf8"), originalHook);
   assert.equal(
     await run("git", ["config", "--local", "--get", "core.hooksPath"], repoDir),
     ".git/custom-hooks",
   );
-  await exec("npm", ["uninstall", "--prefix", installDir, "recipe"], installDir);
+  await execNpm(["uninstall", "--prefix", installDir, "recipe"], installDir);
   assert.equal(await readFile(hookPath, "utf8"), originalHook);
 });

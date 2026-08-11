@@ -51,14 +51,13 @@ test("recipe init is local-only and idempotent", async () => {
 test("recipe run commits, finalizes, attaches, inspects, and replays without session ids", async () => {
   const repoDir = await createTempRepo("recipe-run");
   await commitFile(repoDir, "calc.js", "export const calc = () => 0;\n", "base");
-  const codexFixture = path.join(repoDir, "codex");
+  const codexFixture = path.join(repoDir, "codex.mjs");
   await writeFile(
     codexFixture,
-    `#!/usr/bin/env node\nimport { writeFileSync } from "node:fs";\nwriteFileSync("calc.js", "export const calc = () => 42;\\n");\n`,
+    `import { writeFileSync } from "node:fs";\nwriteFileSync("calc.js", "export const calc = () => 42;\\n");\n`,
     "utf8",
   );
-  await chmod(codexFixture, 0o755);
-  await run("git", ["add", "codex"], repoDir);
+  await run("git", ["add", "codex.mjs"], repoDir);
   await run("git", ["commit", "-m", "add codex fixture"], repoDir);
   const baseCommit = await run("git", ["rev-parse", "HEAD"], repoDir);
   await runCli(repoDir, ["init"]);
@@ -72,14 +71,12 @@ test("recipe run commits, finalizes, attaches, inspects, and replays without ses
       "Fix calc so it returns forty two.",
       "--message",
       "fix: return forty two",
-      "--",
+      "--source-agent",
       "codex",
+      "--",
+      process.execPath,
+      codexFixture,
     ],
-    {
-      env: {
-        PATH: `${repoDir}${path.delimiter}${process.env.PATH}`,
-      },
-    },
   );
 
   assert.match(output, /Captured and attached Recipe/);

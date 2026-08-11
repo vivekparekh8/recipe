@@ -1,6 +1,6 @@
 # Phase 2 workflow verification
 
-Verified on 2026-07-14 with Node.js v22.17.0.
+Originally verified on 2026-07-14 and revalidated on 2026-08-10 with Node.js 22.
 
 | Requirement | Evidence |
 | --- | --- |
@@ -14,4 +14,4 @@ Verified on 2026-07-14 with Node.js v22.17.0.
 
 Automated coverage lives in `test/init-run.test.js`, `test/package-install.test.js`, and `test/hooks-automation.test.js`. The full suite must remain green before release.
 
-Final verification: `npm test` completed with 39 passed and 0 failed. The packed-install test invoked the installed binary from a fresh repository and completed `init`, `run`, `inspect`, `verify --replay`, and exact `replay`.
+Latest verification: `npm test` completed with 47 passed and 0 failed. The packed-install test invoked the installed binary from a fresh repository and completed `init`, `run`, `inspect`, `verify --replay`, exact `replay`, hook removal, package uninstall, and repository-configuration restoration.

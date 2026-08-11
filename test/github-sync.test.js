@@ -180,6 +180,7 @@ process.exit(1);
 
   return {
     fakeDir,
+    scriptPath,
     statePath,
   };
 }
@@ -248,7 +249,9 @@ test("github sync-pr upserts one sticky recipe comment through gh", async () => 
   await runCli(repoDir, ["capture", "--input", draftPath]);
   const fakeGh = await installFakeGh();
   const env = {
-    PATH: `${fakeGh.fakeDir}:${process.env.PATH}`,
+    PATH: `${fakeGh.fakeDir}${path.delimiter}${process.env.PATH}`,
+    RECIPE_GH_EXECUTABLE: process.execPath,
+    RECIPE_GH_SCRIPT: fakeGh.scriptPath,
     RECIPE_FAKE_GH_STATE: fakeGh.statePath,
   };
   const stateBefore = JSON.parse(await readFile(fakeGh.statePath, "utf8"));
@@ -360,7 +363,9 @@ test("github sync-pr can publish the structured recipe bundle to a GitHub releas
   await runCli(repoDir, ["capture", "--input", draftPath]);
   const fakeGh = await installFakeGh();
   const env = {
-    PATH: `${fakeGh.fakeDir}:${process.env.PATH}`,
+    PATH: `${fakeGh.fakeDir}${path.delimiter}${process.env.PATH}`,
+    RECIPE_GH_EXECUTABLE: process.execPath,
+    RECIPE_GH_SCRIPT: fakeGh.scriptPath,
     RECIPE_FAKE_GH_STATE: fakeGh.statePath,
   };
 
@@ -457,7 +462,9 @@ test("inspect/verify/replay can resolve a PR ref through the synced recipe comme
   await runCli(repoDir, ["capture", "--input", draftPath]);
   const fakeGh = await installFakeGh();
   const env = {
-    PATH: `${fakeGh.fakeDir}:${process.env.PATH}`,
+    PATH: `${fakeGh.fakeDir}${path.delimiter}${process.env.PATH}`,
+    RECIPE_GH_EXECUTABLE: process.execPath,
+    RECIPE_GH_SCRIPT: fakeGh.scriptPath,
     RECIPE_FAKE_GH_STATE: fakeGh.statePath,
   };
   const initialState = JSON.parse(await readFile(fakeGh.statePath, "utf8"));
@@ -552,7 +559,9 @@ test("inspect can resolve a PR ref to the PR head commit when no recipe comment 
 
   const fakeGh = await installFakeGh();
   const env = {
-    PATH: `${fakeGh.fakeDir}:${process.env.PATH}`,
+    PATH: `${fakeGh.fakeDir}${path.delimiter}${process.env.PATH}`,
+    RECIPE_GH_EXECUTABLE: process.execPath,
+    RECIPE_GH_SCRIPT: fakeGh.scriptPath,
     RECIPE_FAKE_GH_STATE: fakeGh.statePath,
   };
   const state = JSON.parse(await readFile(fakeGh.statePath, "utf8"));
@@ -636,7 +645,9 @@ test("inspect explains which recipe comment was selected on an ambiguous PR and 
 
   const fakeGh = await installFakeGh();
   const env = {
-    PATH: `${fakeGh.fakeDir}:${process.env.PATH}`,
+    PATH: `${fakeGh.fakeDir}${path.delimiter}${process.env.PATH}`,
+    RECIPE_GH_EXECUTABLE: process.execPath,
+    RECIPE_GH_SCRIPT: fakeGh.scriptPath,
     RECIPE_FAKE_GH_STATE: fakeGh.statePath,
   };
   const state = JSON.parse(await readFile(fakeGh.statePath, "utf8"));
@@ -722,7 +733,9 @@ test("PR resolution can recover the remote bundle from hidden manifest metadata 
 
   const fakeGh = await installFakeGh();
   const env = {
-    PATH: `${fakeGh.fakeDir}:${process.env.PATH}`,
+    PATH: `${fakeGh.fakeDir}${path.delimiter}${process.env.PATH}`,
+    RECIPE_GH_EXECUTABLE: process.execPath,
+    RECIPE_GH_SCRIPT: fakeGh.scriptPath,
     RECIPE_FAKE_GH_STATE: fakeGh.statePath,
   };
   const state = JSON.parse(await readFile(fakeGh.statePath, "utf8"));
