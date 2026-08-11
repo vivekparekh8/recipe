@@ -17,7 +17,7 @@ Recipe wraps the agent you already use. It records public-safe provenance, lets 
 Requires Git, Node.js 22+, and a repository with at least one commit. Install directly from GitHub while the npm package is being prepared:
 
 ```bash
-npm install --global https://github.com/vivekparekh8/recipe/archive/refs/heads/main.tar.gz
+npm install --global https://github.com/vivekparekh8/recipe/archive/refs/tags/v0.1.0.tar.gz
 ```
 
 Then run Recipe around Codex, Claude Code, Aider, or another command:
@@ -121,7 +121,7 @@ Recipe currently ships deterministic playback, line attribution, mixed-authorshi
 
 Next priorities are a scoped npm release, signed recipe attestations, richer environment-drift diagnostics, and broader agent protocol import. See the [roadmap](ROADMAP.md).
 
-Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), report sensitive problems through [SECURITY.md](SECURITY.md), or open a focused issue with a reproduction.
+Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), review the [changelog](CHANGELOG.md), report sensitive problems through [SECURITY.md](SECURITY.md), or open a focused issue with a reproduction.
 
 ## License
 
